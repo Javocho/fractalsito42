@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mmonpeat <mmonpeat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 21:02:12 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/06/29 23:24:30 by fcosta-f         ###   ########.fr       */
+/*   Created: 2022/10/03 18:58:11 by mmonpeat          #+#    #+#             */
+/*   Updated: 2022/10/08 17:38:56 by mmonpeat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,12 @@
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	unsigned int	i;
+	int	i;
 
-	if (s != NULL && f != NULL)
-	{		
-		i = 0;
-		while (s[i] != '\0')
-		{
-			f(i, &s[i]);
-			++i;
-		}
+	i = 0;
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
 	}
 }
-
-/*
-int main() {
-    char s[] = "Hello, World!";
-    
-    printf("Original string: %s\n", s);
-    
-    ft_striteri(s, printChar);
-    
-    return 0;
-}
-*/

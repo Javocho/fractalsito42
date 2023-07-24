@@ -3,47 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mmonpeat <mmonpeat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/27 18:16:41 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/05/27 18:18:49 by fcosta-f         ###   ########.fr       */
+/*   Created: 2022/09/28 16:20:21 by mmonpeat          #+#    #+#             */
+/*   Updated: 2022/10/03 15:46:04 by mmonpeat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, const char *src, size_t dest_size)
+size_t	ft_strlcat(char *dst, char *src, size_t dstsize)
 {
+	size_t	a;
+	size_t	b;
 	size_t	i;
-	size_t	j;
 
+	if (dstsize <= ft_strlen(dst))
+		return (dstsize + ft_strlen(src));
+	a = ft_strlen(dst);
+	b = ft_strlen(dst);
 	i = 0;
-	j = 0;
-	while (dest[i] && i < dest_size)
-		i++;
-	while (src[j] && i + j + 1 < dest_size)
+	while (src[i] != '\0' && a < dstsize - 1)
 	{
-		dest[i + j] = src[j];
-		j++;
+		dst[a] = src[i];
+		a++;
+		i++;
 	}
-	if (i != dest_size)
-		dest[i + j] = '\0';
-	while (src[j])
-		j++;
-	return (i + j);
+	if (dstsize != 0 && a <= dstsize)
+		dst[a] = '\0';
+	return (b + ft_strlen(src));
 }
-
-/*
-int main(void) {
-    char dest[20] = "Hello, ";
-    const char *src = "world!";
-    size_t dest_size = sizeof(dest);
-    
-    size_t result = ft_strlcat(dest, src, dest_size);
-    
-    printf("Result: %s\n", dest);
-    printf("Result length: %zu\n", result);
-    
-    return 0;
-}
-*/

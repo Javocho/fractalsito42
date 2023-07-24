@@ -3,84 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mmonpeat <mmonpeat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/26 12:20:37 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/06/29 22:39:48 by fcosta-f         ###   ########.fr       */
+/*   Created: 2022/10/06 16:52:58 by mmonpeat          #+#    #+#             */
+/*   Updated: 2022/10/10 15:20:25 by mmonpeat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	count_digits(int n)
-{
-	int	digits;
-
-	digits = 0;
-	if (n == 0)
-		++digits;
-	if (n < 0)
-		++digits;
-	while (n != 0)
-	{
-		++digits;
-		n /= 10;
-	}
-	return (digits);
-}
-
-static char	*ft_array(char *x, int number, size_t len)
-{
-	while (number > 0)
-	{
-		x[len--] = '0' + (number % 10);
-		number = number / 10;
-	}
-	return (x);
-}
+static int	len(long int n);
 
 char	*ft_itoa(int n)
 {
-	char		*str;
-	size_t		digits;
+	char		*m;
+	long int	num;
+	int			size;
 
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	digits = count_digits(n);
-	str = malloc(sizeof(char) * (digits + 1));
-	if (str == NULL)
+	num = n;
+	size = len(num);
+	m = (char *)malloc(sizeof(char) * (size + 1));
+	if (!m)
 		return (NULL);
-	str[digits] = '\0';
-	--digits;
-	if (n == 0)
-		str[0] = '0';
-	else if (n < 0)
+	if (num == 0)
+		m[0] = '0';
+	if (num < 0)
 	{
-		str[0] = '-';
-		n *= -1;
+		num = -num;
+		m[0] = '-';
 	}
-	str = ft_array(str, n, digits);
-	return (str);
+	m[size] = '\0';
+	while (num > 0)
+	{
+		m[--size] = num % 10 + '0';
+		num = num / 10;
+	}
+	return (m);
 }
 
-/*#include <stdlib.h>
-#include <stdio.h>
-int main(int argc, char **argv)
+static int	len(long int n)
 {
-	int num = ft_atoi(argv[1]);
-	char *str = ft_itoa(num);
+	int	i;
 
-	if (str == NULL)
+	i = 0;
+	if (n == 0)
+		i = 1;
+	if (n < 0)
 	{
-		printf("Error: No se pudo asignar memoria.\n");
-		return 1;
+		n = -n;
+		i++;
 	}
-
-	printf("Número: %d\n", num);
-	printf("Cadena resultante: %s\n", str);
-
-	free(str);
-
-	return 0; //que guay hacerlo con strdup
+	while (n > 0)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i);
 }
-*/

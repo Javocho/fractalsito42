@@ -3,41 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mmonpeat <mmonpeat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/26 18:34:16 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/06/30 11:07:17 by fcosta-f         ###   ########.fr       */
+/*   Created: 2022/09/16 19:48:44 by mmonpeat          #+#    #+#             */
+/*   Updated: 2023/07/18 12:21:22 by mmonpeat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *str, int c)
+char	*ft_strchr(const char *s, int c)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] && (unsigned char)str[i] != (unsigned char)c)
-		i++;
-	if ((unsigned char)str[i] == (unsigned char)c)
-		return ((char *)& str[i]);
-	return (NULL);
+	if (!(unsigned char)c)
+		return ((char *)s + ft_strlen(s));
+	while (*((unsigned char *)s) != '\0')
+	{
+		if (*((unsigned char *)s) == (unsigned char)c)
+			return ((char *)s);
+		s++;
+	}
+	return (0);
 }
-
-/*#include <stdio.h> 
-he intnetado poner unsigned char para el juego de prueba
- fuera de carácteres válidos
-int main(void) {
-    const char *str = "Hello, World!";
-    int c = 'W';
-
-    char *result = ft_strchr(str, c);
-    if (result != NULL) {
-        printf("Carácter encontrado: %c\n", *result);
-        printf("Resto de la cadena: %s\n", result);
-    } else {
-        printf("Carácter no encontrado.\n");
-    }
-
-    return 0;
-}*/

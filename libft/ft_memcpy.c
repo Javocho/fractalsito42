@@ -3,45 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mmonpeat <mmonpeat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/26 12:35:32 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/06/29 17:31:49 by fcosta-f         ###   ########.fr       */
+/*   Created: 2022/09/27 18:39:20 by mmonpeat          #+#    #+#             */
+/*   Updated: 2022/10/01 19:09:51 by mmonpeat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-// #include "ft_atoi.c"
-// #include <stdio.h>
-// #include <stdlib.h>
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	char		*d ;
-	const char	*s;
+	size_t	i;
 
-	d = dest;
-	s = src;
-	if (!dest && !src)
-		return (NULL);
-	while (n > 0)
+	if ((!src && !dst) || !n)
+		return (dst);
+	i = 0;
+	while (i < n)
 	{
-		*d = *s;
-		d++;
-		s++;
-		n--;
+		((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+		i++;
 	}
-	return (dest);
+	return (dst);
 }
-//cast implícito
-/*int main(int argc, char** argv) {
-	if (argc == 4) {
-		int size = ft_atoi(argv[3]);
-		size_t ssize = (size_t)size;
-		char *dest = argv[2];
-		memcpy(dest, argv[1], ssize);
-		printf("%s", dest);
-	}
-	return (0);
-}
-*/

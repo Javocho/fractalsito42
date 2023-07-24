@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mmonpeat <mmonpeat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/26 12:32:04 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/06/03 09:40:03 by fcosta-f         ###   ########.fr       */
+/*   Created: 2022/09/19 16:18:35 by mmonpeat          #+#    #+#             */
+/*   Updated: 2022/10/01 19:09:08 by mmonpeat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,14 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	const unsigned char	*p;
+	size_t	i;
 
-	p = s;
-	while (n > 0)
+	i = 0;
+	while (i < n)
 	{
-		if (*p == (unsigned char)c)
-		{
-			s = p;
-			return ((char *)(p));
-		}
-		p++;
-		n--;
+		if (((unsigned char *)s)[i] == (unsigned char)c)
+			return ((unsigned char *)&s[i]);
+		i++;
 	}
 	return (NULL);
 }
-
-/*
-int main(void)
-{
-    char str[] = "Hello, World!";
-    char *result = memchr(str, 'W', sizeof(str));
-
-    if (result == NULL)
-    {
-        printf("El caracter 'W' no se encontró en la cadena.\n");
-    }
-    else
-    {
-        size_t index = result - str;
-        printf("El caracter 'W' se encontró en la posición %zu de 
-		la cadena.\n", index);
-    }
-
-    return 0;
-}
-
-*/

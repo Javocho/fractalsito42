@@ -3,41 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mmonpeat <mmonpeat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/26 13:12:27 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/05/26 13:17:29 by fcosta-f         ###   ########.fr       */
+/*   Created: 2022/09/16 19:49:17 by mmonpeat          #+#    #+#             */
+/*   Updated: 2022/10/01 19:10:20 by mmonpeat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *ptr, int value, size_t num)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	unsigned char	*p;
+	unsigned int	i;
+	unsigned char	*a;
 
-	p = ptr;
-	while (num > 0)
+	i = 0;
+	a = (unsigned char *)b;
+	while (i < len)
 	{
-		*p = value;
-		p++;
-		num--;
+		a[i] = c;
+		i++;
 	}
-	return (ptr);
+	return (b);
 }
-
-/*
-int main()
-{
-    char str[] = "Hello, world!";
-    size_t len = strlen(str);
-
-    printf("Antes: %s\n", str);
-
-    ft_memset(str, 'A', len);
-
-    printf("Después: %s\n", str);
-
-    return 0;
-}
-*/

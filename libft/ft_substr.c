@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mmonpeat <mmonpeat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 16:51:44 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/06/30 13:01:33 by fcosta-f         ###   ########.fr       */
+/*   Created: 2022/10/03 18:18:23 by mmonpeat          #+#    #+#             */
+/*   Updated: 2022/10/13 15:54:33 by mmonpeat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,27 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*substr;
+	char	*save;
 	size_t	len_s;
-	size_t	i;
 
-	len_s = ft_strlen(s);
 	if (!s)
 		return (NULL);
-	if (start > len_s)
-		return (ft_strdup(""));
-	len_s -= start;
-	if (len_s < len)
-		len = len_s;
-	substr = (char *)malloc(sizeof(char) * (len + 1));
-	if (!substr)
-		return (NULL);
-	i = 0;
-	while (i < len && s[start + i])
+	len_s = ft_strlen(s);
+	if (len > len_s - start)
+		len = len_s - start;
+	if (start >= len_s)
 	{
-		substr[i] = s[start + i];
-		i++;
+		save = (char *)malloc(1);
+		if (!save)
+			return (NULL);
+		save[0] = '\0';
+		return (save);
 	}
-	substr[i] = '\0';
-	return (substr);
+	save = (char *)malloc(sizeof(char) * (len + 1));
+	if (!save)
+		return (NULL);
+	while (start--)
+		s++;
+	ft_strlcpy(save, s, len + 1);
+	return (save);
 }
-
-/*int main()
-{
-    char *s = "0123456789";
-    unsigned int start = 9;
-    size_t len = 10;
-
-    char *substr = ft_substr(s, start, len);
-    if (substr)
-    {
-        printf("Subcadena: %s\n", substr);
-        free(substr); // Liberar la memoria asignada por ft_substr
-    }
-    else
-    {
-        printf("Error al obtener la subcadena.\n");
-    }
-
-    return 0;
-}
-*/

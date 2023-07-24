@@ -3,45 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mmonpeat <mmonpeat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/27 18:19:15 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/06/02 19:31:33 by fcosta-f         ###   ########.fr       */
+/*   Created: 2022/09/28 12:58:06 by mmonpeat          #+#    #+#             */
+/*   Updated: 2022/10/01 19:12:56 by mmonpeat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
+	size_t	size;
 	size_t	i;
-	size_t	lensrc;
 
-	i = 0 ;
-	if (size > 0)
+	size = 0;
+	while (src[size] != '\0')
+		size++;
+	if (dstsize == 0)
+		return (size);
+	i = 0;
+	while (((char *)src)[i] && i < dstsize - 1)
 	{
-		while (i < size - 1 && src[i])
-		{
-			dest[i] = src[i];
-			i++;
-		}
-		dest[i] = '\0';
+		dst[i] = ((char *)src)[i];
+		i++;
 	}
-	lensrc = ft_strlen(src);
-	return (lensrc);
+	dst[i] = '\0';
+	return (size);
 }
-
-/*
-int main(void) {
-    char dest[20];
-    const char *src = "Hello, world!";
-    size_t size = sizeof(dest);
-    
-    size_t result = ft_strlcpy(dest, src, size);
-    
-    printf("Result: %s\n", dest);
-    printf("Result length: %zu\n", result);
-    
-    return 0;
-}
-*/

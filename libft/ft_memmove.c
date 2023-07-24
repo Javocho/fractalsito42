@@ -3,47 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mmonpeat <mmonpeat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/26 13:11:54 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/06/29 17:33:03 by fcosta-f         ###   ########.fr       */
+/*   Created: 2022/09/27 18:44:16 by mmonpeat          #+#    #+#             */
+/*   Updated: 2022/10/01 19:10:13 by mmonpeat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
-
-	d = (unsigned char *)dest;
-	s = (const unsigned char *)src;
-	if (!dest && !src)
-		return (NULL);
-	if (d < s)
+	if (dst > src)
 	{
-		while (n--)
-			*d++ = *s++;
+		while (len--)
+			((unsigned char *)dst)[len] = ((unsigned char *)src)[len];
 	}
 	else
-	{
-		while (n--)
-			d[n] = s[n];
-	}
-	return (dest);
+		ft_memcpy(dst, src, len);
+	return (dst);
 }
-
-/*
-int main()
-{
-    char src[] = "Hello, world!";
-    char dest[sizeof(src)];
-
-    ft_memmove(dest, src, sizeof(src));
-
-    printf("Resultado: %s\n", dest);
-
-    return 0;
-}
-*/

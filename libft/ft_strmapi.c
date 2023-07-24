@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mmonpeat <mmonpeat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/27 18:42:56 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/05/27 18:45:45 by fcosta-f         ###   ########.fr       */
+/*   Created: 2022/10/03 18:42:24 by mmonpeat          #+#    #+#             */
+/*   Updated: 2022/10/06 16:44:39 by mmonpeat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,18 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	size_t			len;
-	char			*result;
-	unsigned int	i;
+	int		i;
+	char	*res;
 
-	if (s == NULL || f == NULL)
-		return (NULL);
-	len = strlen(s);
-	result = malloc(sizeof(char) * (len + 1));
-	if (result == NULL)
+	res = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!res)
 		return (NULL);
 	i = 0;
-	while (i < len)
+	while (s[i])
 	{
-		result[i] = f(i, s[i]);
-		++i;
+		res[i] = f(i, s[i]);
+		i++;
 	}
-	result[len] = '\0';
-	return (result);
+	res[i] = '\0';
+	return (res);
 }
-
-/*
-int main(void) {
-    const char *str = "Hello, world!";
-    
-    char *result = ft_strmapi(str, uppercase_mapping);
-    
-    printf("Original string: %s\n", str);
-    printf("Result string: %s\n", result);
-    
-    free(result);
-    
-    return 0;
-}
-*/

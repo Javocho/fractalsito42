@@ -3,45 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcosta-f <fcosta-f@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mmonpeat <mmonpeat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/28 13:33:00 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/06/30 11:11:04 by fcosta-f         ###   ########.fr       */
+/*   Created: 2022/09/19 14:41:58 by mmonpeat          #+#    #+#             */
+/*   Updated: 2022/10/01 19:14:43 by mmonpeat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *str, int c)
+char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
+	unsigned char	*start;
 
-	i = 0;
-	while (str[i])
-		i++;
-	while (i >= 0)
+	start = (unsigned char *)s - 1;
+	while (*((unsigned char *)s) != '\0')
+		s++;
+	if (!(unsigned char)c)
+		return ((char *)s);
+	s--;
+	while (((unsigned char *)s) != start)
 	{
-		if ((unsigned char)str[i] == (unsigned char)c)
-			return ((char *)(str + i));
-		i--;
+		if (*((unsigned char *)s) == (unsigned char)c)
+			return ((char *)s);
+		s--;
 	}
-	return (NULL);
+	return (0);
 }
-
-/*
-int main()
-{
-    const char *str = "Hello, world!";
-    int c = 'o';
-
-    char *result = ft_strrchr(str, c);
-
-    if (result != NULL)
-        printf("Last occurrence of '%c' found at position:
-		 %ld\n", c, result - str);
-    else
-        printf("'%c' not found\n", c);
-
-    return 0;
-}
-*/
