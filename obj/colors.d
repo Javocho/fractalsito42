@@ -1,10 +1,8 @@
-obj//colors.o: colors.c include/fractol.h mlx/mlx.h libft/libft.h \
-  include/structs.h
+obj/colors.o: src/colors.c src/../inc/fractol.h minilibx/mlx.h \
+  inc/macros.h
 
-include/fractol.h:
+src/../inc/fractol.h:
 
-mlx/mlx.h:
+minilibx/mlx.h:
 
-libft/libft.h:
-
-include/structs.h:
+inc/macros.h:

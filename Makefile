@@ -1,52 +1,60 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/08/02 17:26:21 by fcosta-f          #+#    #+#              #
+#    Updated: 2023/08/02 17:38:33 by fcosta-f         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-NAME		= fractol
-HEADER		= include/fractol.h
+NAME		= Fract-ol
+HEADER		= fract-ol.h
 
-INCLUDE		= -I./ -I libft -I mlx
+INCLUDE		= -I./inc -Iminilibx -Ilibft
+SRCS_DIR 	= src
+OBJ_DIR		= obj
 
-OBJ_DIR		= obj/
+SRCS		= $(wildcard $(SRCS_DIR)/*.c)
+OBJS		= $(patsubst $(SRCS_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
+DEPS		= $(addsuffix .d,$(basename ${OBJS}))
+RUTAS		= minilibx/libmlx.a libft/libft.a
 
 CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra
-
-SRCS		= main.c needs.c colors.c complex.c
-OBJS		= $(addprefix ${OBJ_DIR}/,$(SRCS:.c=.o))
-DEPS		= $(addsuffix .d,$(basename ${OBJS}))
-RUTAS		= libft/libft.a mlx/libmlx.a
+CFLAGS		= -Wall -Wextra -Werror -O3
+RM			= rm -rf
 
 ######## COLORS #########
 GREEN		= \033[1;92m
-YELLOW 		= \033[1;93m
 RED			= \033[1;91m
 NC			= \033[0m
 
-${OBJ_DIR}/%.o: %.c Makefile
-				@echo "$(YELLOW)creating.. $(NC)"
-				@echo "$(YELLOW)compiling.. $(notdir $<)$(NC)"
-				@mkdir -p ${OBJ_DIR}
-				@${CC} -MT $@ ${CFLAGS} -MMD -MP ${INCLUDE} -c $< -o $@
+${OBJ_DIR}/%.o: ${SRCS_DIR}/%.c Makefile
+	@mkdir -p ${OBJ_DIR}
+	@${CC} -MT $@ ${CFLAGS} -MMD -MP ${INCLUDE} -c $< -o $@
+	@echo "$(GREEN)Compiled: $<$(NC)"
 
-all:
-				@${MAKE} -sC libft
-				@${MAKE} -sC mlx
-				@${MAKE} ${NAME}
+all: ${NAME}
 
-${NAME}: ${OBJS} 
-				${CC} ${CFLAGS} ${OBJS} ${RUTAS} -Lmlx -lmlx -framework OpenGL -framework AppKit -o ${NAME}
-				@echo "$(GREEN)fract-ol compiled$(NC)"
-
+${NAME}: ${OBJS}
+	@${MAKE} -C minilibx
+	@${MAKE} -C libft
+	${CC} ${CFLAGS} ${OBJS} ${RUTAS} -framework OpenGL -framework AppKit -o ${NAME}
+	@echo "$(GREEN)$(NAME) compiled$(NC)"
 
 -include ${DEPS}
 
 clean:
-				@${MAKE} clean -sC libft
-				@${MAKE} clean -sC mlx
-				rm -rf ${OBJ_DIR}
-				@echo "$(RED)\nDestruction successful\n$(NC)"
+	@${MAKE} clean -C minilibx
+	@${MAKE} clean -C libft
+	@rm -rf ${OBJ_DIR}
+	@echo "$(RED)Cleaned up object files$(NC)"
 
 fclean: clean
-				@${MAKE} fclean -sC libft
-				rm -rf ${NAME}
+	@rm -rf ${NAME}
+	@echo "$(RED)Removed executable: $(NAME)$(NC)"
 
 re: fclean all
 

@@ -1,10 +1,7 @@
-obj//needs.o: needs.c include/fractol.h mlx/mlx.h libft/libft.h \
-  include/structs.h
+obj/needs.o: src/needs.c src/../inc/fractol.h minilibx/mlx.h inc/macros.h
 
-include/fractol.h:
+src/../inc/fractol.h:
 
-mlx/mlx.h:
+minilibx/mlx.h:
 
-libft/libft.h:
-
-include/structs.h:
+inc/macros.h:
