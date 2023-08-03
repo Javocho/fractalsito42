@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:32:52 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/02 20:20:33 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/03 17:48:12 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,16 @@ int read_key(int press_key, t_all *all)
 		all->mv->iter -= 100;
 	else if (press_key == NP_PLU)
 		all->mv->iter += 100;
-	mandelbrot(all);
+	if (strncmp(all->fractal->name, "mandelbrot", 12) == 0)
+        mandelbrot(all);
+    else if (strncmp(all->fractal->name, "julia", 12) == 0)
+        julia(all);
 	return (0);
 }
 
 int read_mouse_scroll(int button, int x, int y, t_all *all)
 {
-     if (button == MOUSE_SCROLL_UP)
+    if (button == MOUSE_SCROLL_UP)
     {
         all->mv->z += 0.5;
         printf("Zoom in: %f x: %i, y:%i\n", all->mv->z, x, y);
@@ -44,9 +47,23 @@ int read_mouse_scroll(int button, int x, int y, t_all *all)
         all->mv->z -= 0.5;
         printf("Zoom out: %f, x: %i, y:%i\n", all->mv->z, x, y);
     }
-    mandelbrot(all);
+    else if (button == MOUSE_LEFT_BUTTON)
+    {
+        all->mv->z += 0.5;
+        all->mv->x += x;
+        all->mv->y -= y;
+    }
+    if (strncmp(all->fractal->name, "mandelbrot", 12) == 0)
+        mandelbrot(all);
+    else if (strncmp(all->fractal->name, "julia", 12) == 0)
+        julia(all);
     return (0);
 }
+
+// int read_mouse_click(int button, int x, int y, t_all *all)
+// {
+    
+// }
 
 // void    zoom(t_all *all, int n)
 // {

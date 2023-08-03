@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:30:55 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/02 20:17:56 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/03 17:48:01 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include "../libft/libft.h"
 #include "macros.h"
 
 # define ESC 53
@@ -51,6 +52,7 @@ typedef struct s_fractal
 	int		i;
 	double	x;
 	double	y;
+	char *name;
 }			t_fractal;
 
 typedef struct s_move
@@ -77,7 +79,7 @@ void    start_all(t_img *img, t_win win, t_fractal *fractal, t_move *mv, t_all *
 void    start_fractal(t_fractal *fractal);
 
 /*HOOKS*/
-int 	read_key(int press_key, t_all *all);
+int read_key(int press_key, t_all *all);
 int read_mouse_scroll(int button, int x, int y, t_all *all);
 
 /*MASKS FT*/
@@ -86,6 +88,7 @@ void    zoom(t_all *all, int n);
 
 /* FRACTALES */
 void    mandelbrot(t_all *all);
+void    julia(t_all *all);
 
 /* COLORS */
 void    put_color_px(int i, t_fractal *fractal, t_img *img);
