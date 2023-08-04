@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:30:55 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/03 17:48:01 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/04 17:54:08 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,21 @@ typedef struct s_fractal
 {
 	int		row;
 	int		col;
-	double	c_re;
-	double	c_im;
+	float	c_re;
+	float	c_im;
 	int		i;
-	double	x;
-	double	y;
-	char *name;
+	float	x;
+	float	y;
+	char 	*name;
+	float juliaarg1;
+	float juliaarg2;
 }			t_fractal;
 
 typedef struct s_move
 {
-	double	x;
-	double	y;
-	double	z;
+	float	x;
+	float	y;
+	float	z;
 	int iter;
 }			t_move;
 
@@ -81,6 +83,7 @@ void    start_fractal(t_fractal *fractal);
 /*HOOKS*/
 int read_key(int press_key, t_all *all);
 int read_mouse_scroll(int button, int x, int y, t_all *all);
+int mouse_move(int x, int y, t_all *all);
 
 /*MASKS FT*/
 int 	exit_win(t_win *win);

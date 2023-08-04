@@ -6,7 +6,7 @@
 #    By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 17:26:21 by fcosta-f          #+#    #+#              #
-#    Updated: 2023/08/02 17:38:33 by fcosta-f         ###   ########.fr        #
+#    Updated: 2023/08/04 17:48:31 by fcosta-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ DEPS		= $(addsuffix .d,$(basename ${OBJS}))
 RUTAS		= minilibx/libmlx.a libft/libft.a
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -O3
+CFLAGS		= -Wall -Wextra -Werror -O3 -g
 RM			= rm -rf
 
 ######## COLORS #########

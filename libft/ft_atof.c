@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncastell <ncastell@student.42barcel>       +#+  +:+       +#+        */
+/*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 15:55:02 by ncastell          #+#    #+#             */
-/*   Updated: 2022/12/23 17:01:16 by ncastell         ###   ########.fr       */
+/*   Updated: 2023/08/04 17:54:11 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,39 @@
 //#include <stdlib.h>
 #include "libft.h"
 
-int	ft_atoi(const char *str)
-{
-	int				i;
-	unsigned int	num;
-	int				neg;
+#include <stdbool.h>
 
-	i = 0;
-	num = 0;
-	neg = 1;
-	while ((str[i] > 8 && str[i] < 14) || str[i] == 32)
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			neg = -1;
-		i++;
-	}
-	while (ft_isdigit(str[i]))
-	{
-		num = ((num * 10) + (str[i] - '0'));
-		i++;
-	}
-	return ((int)(num * neg));
+float ft_atof(const char *str)
+{
+    int i = 0;
+    float num = 0.0;
+    float fraction = 0.0;
+    int neg = 1;
+
+    while (str[i] >= '0' && str[i] <= '9')
+    {
+        num = num * 10 + (str[i] - '0');
+        i++;
+    }
+
+    if (str[i] == '-')
+        neg = -1;
+
+    if (str[i] == '.' && str[i + 1] >= '0' && str[i + 1] <= '9')
+    {
+        i++;
+        float divisor = 10.0;
+        while (str[i] >= '0' && str[i] <= '9')
+        {
+            fraction += (str[i] - '0') / divisor;
+            divisor *= 10;
+            i++;
+        }
+    }
+
+    return (num + fraction) * neg;
 }
+
 /*
 int	main(){
 	char num[10] = " -477";
