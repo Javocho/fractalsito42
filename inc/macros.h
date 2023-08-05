@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:01:10 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/02 16:01:13 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/05 21:34:18 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,12 @@
 # define MOUSE_MIDDLE_BUTTON 3    // Middle mouse button
 # define MOUSE_SCROLL_UP 4        // Mouse scroll up (Zoom in)
 # define MOUSE_SCROLL_DOWN 5      // Mouse scroll down (Zoom out)
+
+/*
+** OTHERS
+*/
+
+# define MAX_COLOR 0XFFFFFFF
+
 
 #endif

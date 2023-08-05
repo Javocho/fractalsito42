@@ -6,30 +6,30 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:32:46 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/02 17:32:47 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/05 21:11:20 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
 
-void my_mlx_pixel_put(t_img *img, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
-	char *dst;
+	char	*dst;
 
 	if (x > 0 && y > 0 && x < img->win.w && y < img->win.h)
 	{
 		dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-		*(unsigned int*)dst = color;
+		*(unsigned int *)dst = color;
 	}
 }
 
 
-t_win new_program(int w, int h, char *str)
+t_win	new_program(int w, int h, char *str)
 {
 	void	*mlx_ptr;
 
 	mlx_ptr = mlx_init();
-	return ((t_win) {mlx_ptr, mlx_new_window(mlx_ptr, w, h, str), w, h});
+	return ((t_win){mlx_ptr, mlx_new_window(mlx_ptr, w, h, str), w, h});
 }
 
 t_img	new_img(t_win window)

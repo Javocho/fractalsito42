@@ -6,11 +6,11 @@
 #    By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 17:26:21 by fcosta-f          #+#    #+#              #
-#    Updated: 2023/08/04 17:48:31 by fcosta-f         ###   ########.fr        #
+#    Updated: 2023/08/05 19:41:15 by fcosta-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= Fract-ol
+NAME		= Fractol
 HEADER		= fract-ol.h
 
 INCLUDE		= -I./inc -Iminilibx -Ilibft

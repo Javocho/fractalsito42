@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncastell <ncastell@student.42barcel>       +#+  +:+       +#+        */
+/*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 16:13:58 by ncastell          #+#    #+#             */
-/*   Updated: 2022/10/25 11:36:52 by ncastell         ###   ########.fr       */
+/*   Updated: 2023/08/05 21:16:07 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	while (str1[i] == str2[i])
 	{
 		if (i < (n - 1))
-				i++;
+			i++;
 		else
 			return (0);
 	}
