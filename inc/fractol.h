@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:30:55 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/05 20:48:43 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/06 10:24:20 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 
 typedef struct s_win
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
+	void	*mptr;
+	void	*wptr;
 	int		h;
 	int		w;
 }			t_win;
@@ -83,6 +83,7 @@ t_img	new_img(t_win window);
 
 t_all	start_all(t_img *img, t_win win, t_fractal *fractal, t_move *mv);
 void	start_fractal(t_fractal *fractal);
+float	absolutvodka(float f);
 
 /*HOOKS*/
 int		read_key(int press_key, t_all *all);

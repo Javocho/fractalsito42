@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:33:00 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/05 20:23:43 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/06 10:15:36 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ int	main(int argc, char **argv)
 		all = start_all(&img, win, &fractal, &mv);
 		all.fractal->name = argv[1];
 		select_function(all.fractal->name, &all);
-		mlx_key_hook(all.win.win_ptr, read_key, &all);
-		mlx_hook(all.win.win_ptr, BUTTONPRESS, 0, read_mouse_scroll, &all);
+		mlx_key_hook(all.win.wptr, read_key, &all);
+		mlx_hook(all.win.wptr, BUTTONPRESS, 0, read_mouse_scroll, &all);
 		if (ft_strncmp(argv[1], "julia", 12) == 0)
-			mlx_hook(all.win.win_ptr, MOTIONNOTIFY, 0, mouse_move, &all);
-		mlx_hook(all.win.win_ptr, DESTROYNOTIFY, 0, exit_win, &all);
-		mlx_loop(all.win.mlx_ptr);
+			mlx_hook(all.win.wptr, MOTIONNOTIFY, 0, mouse_move, &all);
+		mlx_hook(all.win.wptr, DESTROYNOTIFY, 0, exit_win, &all);
+		mlx_loop(all.win.mptr);
 	}
 }

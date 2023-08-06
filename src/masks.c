@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:32:52 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/05 21:09:49 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/06 10:15:36 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,6 @@ int	mouse_move(int x, int y, t_all *all)
 int	exit_win(t_win *win)
 {
 	if (win)
-		mlx_destroy_window(win->mlx_ptr, win->win_ptr);
+		mlx_destroy_window(win->mptr, win->wptr);
 	exit(EXIT_SUCCESS);
 }

@@ -6,11 +6,18 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:32:46 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/06 10:08:44 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/06 10:23:58 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
+
+float	absolutvodka(float f)
+{
+	if (f < 0)
+		f = -f;
+	return (f);
+}
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
@@ -25,10 +32,10 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 t_win	new_program(int w, int h, char *str)
 {
-	void	*mlx_ptr;
+	void	*mptr;
 
-	mlx_ptr = mlx_init();
-	return ((t_win){mlx_ptr, mlx_new_window(mlx_ptr, w, h, str), w, h});
+	mptr = mlx_init();
+	return ((t_win){mptr, mlx_new_window(mptr, w, h, str), w, h});
 }
 
 t_img	new_img(t_win window)
@@ -36,7 +43,7 @@ t_img	new_img(t_win window)
 	t_img	image;
 
 	image.win = window;
-	image.img = mlx_new_image(window.mlx_ptr, window.w, window.h);
+	image.img = mlx_new_image(window.mptr, window.w, window.h);
 	image.addr = mlx_get_data_addr(image.img, &(image.bpp), 
 			&(image.line_len), &(image.endian));
 	return (image);

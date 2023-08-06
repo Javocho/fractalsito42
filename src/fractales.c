@@ -6,13 +6,41 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:33:07 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/06 10:12:05 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/06 10:25:49 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
 
-int	count_iterations(t_fractal *f, t_all *all)
+int	count_iterations(t_fractal *f, t_all *all, int nfract)
+{
+	float	tmp;
+
+	tmp = 0;
+	if (nfract == 1)
+	{
+		while (f->i < all->mv->iter && ((f->x * f->x) + (f->y * f->y) <= 4.0f))
+		{
+			tmp = (f->x * f->x) - (f->y * f->y) + f->c_re;
+			f->y = 2.0f * f->x * f->y + f->c_im;
+			f->x = tmp;
+			f->i++;
+		}
+	}
+	else if (nfract == 2)
+	{
+		while (f->i < all->mv->iter && ((f->x * f->x) + (f->y * f->y) <= 4.0f))
+		{
+			tmp = (f->x * f->x) - (f->y * f->y) + all->fractal->julia1;
+			f->y = 2.0f * f->x * f->y + all->fractal->julia2;
+			f->x = tmp;
+			f->i++;
+		}
+	}
+	return (f->i);
+}
+
+int	count_iter_ship(t_fractal *f, t_all *all)
 {
 	float	tmp;
 
@@ -20,8 +48,8 @@ int	count_iterations(t_fractal *f, t_all *all)
 	while (f->i < all->mv->iter && ((f->x * f->x) + (f->y * f->y) <= 4.0f))
 	{
 		tmp = (f->x * f->x) - (f->y * f->y) + f->c_re;
-		f->y = 2.0f * f->x * f->y + f->c_im;
-		f->x = tmp;
+		f->y = absolutvodka(2.0f * f->x * f->y + f->c_im);
+		f->x = absolutvodka(tmp);
 		f->i++;
 	}
 	return (f->i);
@@ -43,14 +71,14 @@ void	mandelbrot(t_all *all)
 			f->i = 0;
 			f->x = 0;
 			f->y = 0;
-			f->i = count_iterations(f, all);
+			f->i = count_iterations(f, all, 1);
 			if (f->i < all->mv->iter)
 				put_color_px(f->i, f, all->img, all->mv->iter);
 			else
 				my_mlx_pixel_put(all->img, f->col, f->row, 0x00000080);
 		}
 	}
-	mlx_put_image_to_window(all->win.mlx_ptr, all->win.win_ptr, all->img->img, 0, 0);
+	mlx_put_image_to_window(all->win.mptr, all->win.wptr, all->img->img, 0, 0);
 }
 
 void	julia(t_all *all)
@@ -67,14 +95,14 @@ void	julia(t_all *all)
 			f->i = 0;
 			f->x = (f->row - all->mv->x) * 3.0f / (all->mv->z * W);
 			f->y = (f->col - all->mv->y) * 3.0f / (all->mv->z * H);
-			f->i = count_iterations(f, all);
+			f->i = count_iterations(f, all, 2);
 			if (f->i < all->mv->iter)
 				put_color_px(f->i, f, all->img, all->mv->iter);
 			else
 				my_mlx_pixel_put(all->img, f->col, f->row, 0x00000080);
 		}
 	}
-	mlx_put_image_to_window(all->win.mlx_ptr, all->win.win_ptr, all->img->img, 0, 0);
+	mlx_put_image_to_window(all->win.mptr, all->win.wptr, all->img->img, 0, 0);
 }
 
 // void draw_sierpinski(int x, int y, int size, t_img *img)
@@ -111,15 +139,8 @@ void	julia(t_all *all)
 
 // 	draw_sierpinski(triangleX, triangleY, triangleSize, img);
 
-// 	mlx_put_image_to_window(all->win.mlx_ptr, all->win.win_ptr, img->img, 0, 0);
+// 	mlx_put_image_to_window(all->win.mptr, all->win.wptr, img->img, 0, 0);
 // }
-
-float	absolutvodka(float f)
-{
-	if (f < 0)
-		f = -f;
-	return (f);
-}
 
 void	ship(t_all *all)
 {
@@ -137,12 +158,12 @@ void	ship(t_all *all)
 			f->i = 0;
 			f->x = 0;
 			f->y = 0;
-			f->i = count_iterations(f, all);
+			f->i = count_iter_ship(f, all);
 			if (f->i < all->mv->iter)
 				put_color_px(f->i, f, all->img, all->mv->iter);
 			else
 				my_mlx_pixel_put(all->img, f->col, f->row, 0x00000080);
 		}
 	}
-	mlx_put_image_to_window(all->win.mlx_ptr, all->win.win_ptr, all->img->img, 0, 0);
+	mlx_put_image_to_window(all->win.mptr, all->win.wptr, all->img->img, 0, 0);
 }
