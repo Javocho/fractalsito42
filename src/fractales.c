@@ -6,22 +6,35 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:33:07 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/05 21:13:32 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/06 10:12:05 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
 
+int	count_iterations(t_fractal *f, t_all *all)
+{
+	float	tmp;
+
+	tmp = 0;
+	while (f->i < all->mv->iter && ((f->x * f->x) + (f->y * f->y) <= 4.0f))
+	{
+		tmp = (f->x * f->x) - (f->y * f->y) + f->c_re;
+		f->y = 2.0f * f->x * f->y + f->c_im;
+		f->x = tmp;
+		f->i++;
+	}
+	return (f->i);
+}
+
 void	mandelbrot(t_all *all)
 {
-	float		tmp;
 	t_fractal	*f;
 
 	f = all->fractal;
 	f->row = -1;
 	while (++f->row < H)
 	{
-		tmp = 0;
 		f->col = -1;
 		f->c_im = (f->row - all->mv->y) * 3.0f / (all->mv->z * H);
 		while (++f->col < W)
@@ -30,14 +43,7 @@ void	mandelbrot(t_all *all)
 			f->i = 0;
 			f->x = 0;
 			f->y = 0;
-			while (f->i < all->mv->iter && ((f->x * f->x) + (f->y * f->y) <= 4.0f))
-			{
-				tmp = (f->x * f->x) - (f->y * f->y) + f->c_re;
-				f->y = 2.0f * f->x * f->y + f->c_im;
-				f->x = tmp;
-				f->i++;
-			}
-
+			f->i = count_iterations(f, all);
 			if (f->i < all->mv->iter)
 				put_color_px(f->i, f, all->img, all->mv->iter);
 			else
@@ -49,28 +55,19 @@ void	mandelbrot(t_all *all)
 
 void	julia(t_all *all)
 {
-	float		tmp;
 	t_fractal	*f;
 
 	f = all->fractal;
 	f->row = -1;
 	while (++f->row < H)
 	{
-		tmp = 0;
 		f->col = -1;
 		while (++f->col < W)
 		{
 			f->i = 0;
 			f->x = (f->row - all->mv->x) * 3.0f / (all->mv->z * W);
 			f->y = (f->col - all->mv->y) * 3.0f / (all->mv->z * H);
-			while (f->i < all->mv->iter && ((f->x * f->x) + (f->y * f->y) <= 4.0f))
-			{
-				tmp = (f->x * f->x) - (f->y * f->y) + all->fractal->julia1;
-				f->y = 2.0f * f->x * f->y + all->fractal->julia2;
-				f->x = tmp;
-				f->i++;
-			}
-
+			f->i = count_iterations(f, all);
 			if (f->i < all->mv->iter)
 				put_color_px(f->i, f, all->img, all->mv->iter);
 			else
@@ -126,14 +123,12 @@ float	absolutvodka(float f)
 
 void	ship(t_all *all)
 {
-	float		tmp;
 	t_fractal	*f;
 
 	f = all->fractal;
 	f->row = -1;
 	while (++f->row < H)
 	{
-		tmp = 0;
 		f->col = -1;
 		f->c_im = (f->row - all->mv->y) * 3.0f / (all->mv->z * H);
 		while (++f->col < W)
@@ -142,14 +137,7 @@ void	ship(t_all *all)
 			f->i = 0;
 			f->x = 0;
 			f->y = 0;
-			while (f->i < all->mv->iter && ((f->x * f->x) + (f->y * f->y) <= 4.0f))
-			{
-				tmp = (f->x * f->x) - (f->y * f->y) + f->c_re;
-				f->y = absolutvodka(2.0f * f->x * f->y + f->c_im);
-				f->x = absolutvodka(tmp);
-				f->i++;
-			}
-
+			f->i = count_iterations(f, all);
 			if (f->i < all->mv->iter)
 				put_color_px(f->i, f, all->img, all->mv->iter);
 			else
@@ -158,4 +146,3 @@ void	ship(t_all *all)
 	}
 	mlx_put_image_to_window(all->win.mlx_ptr, all->win.win_ptr, all->img->img, 0, 0);
 }
-

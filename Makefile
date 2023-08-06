@@ -6,7 +6,7 @@
 #    By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 17:26:21 by fcosta-f          #+#    #+#              #
-#    Updated: 2023/08/05 19:41:15 by fcosta-f         ###   ########.fr        #
+#    Updated: 2023/08/06 09:59:35 by fcosta-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,9 @@ INCLUDE		= -I./inc -Iminilibx -Ilibft
 SRCS_DIR 	= src
 OBJ_DIR		= obj
 
-SRCS		= $(wildcard $(SRCS_DIR)/*.c)
+SRCS		= $(SRCS_DIR)/colors.c $(SRCS_DIR)/fractales.c \
+			$(SRCS_DIR)/main.c $(SRCS_DIR)/masks.c \
+			$(SRCS_DIR)/needs.c $(SRCS_DIR)/starts.c
 OBJS		= $(patsubst $(SRCS_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 DEPS		= $(addsuffix .d,$(basename ${OBJS}))
 RUTAS		= minilibx/libmlx.a libft/libft.a

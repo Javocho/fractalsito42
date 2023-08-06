@@ -6,7 +6,7 @@
 /*   By: fcosta-f <fcosta-f@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:32:46 by fcosta-f          #+#    #+#             */
-/*   Updated: 2023/08/05 21:11:20 by fcosta-f         ###   ########.fr       */
+/*   Updated: 2023/08/06 10:08:44 by fcosta-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 		*(unsigned int *)dst = color;
 	}
 }
-
 
 t_win	new_program(int w, int h, char *str)
 {
